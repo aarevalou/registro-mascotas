@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom mb-4">
+  <div class="container" style="max-width: 860px">
+    <a class="navbar-brand fw-semibold" href="/">Registro de Mascotas</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navMenu"
+      aria-controls="navMenu"
+      aria-label="Abrir menú"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link <%= activo === 'mascotas' ? 'active fw-semibold' : '' %>"
+            href="/mascotas"
+          >
+            Mascotas
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link <%= activo === 'nueva' ? 'active fw-semibold' : '' %>"
+            href="/mascotas/nueva"
+          >
+            Registrar
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <%- include('partials/head') %>
+  <title>Mascotas registradas</title>
+</head>
+<body>
+  <%- include('partials/navbar', { activo }) %>
+
+  <div class="container pb-5" style="max-width: 860px;">
+
+    <% if (error) { %>
+      <div class="alert alert-danger"><%= error %></div>
+    <% } %>
+
+    <div id="alertContainer"></div>
+
+    <div class="card border-0 shadow-sm mb-4">
+      <div class="card-body">
+        <form class="row g-2" method="GET" action="/mascotas">
+          <div class="col-sm-5">
+            <input
+              type="text"
+              name="nombre"
+              value="<%= nombre %>"
+              class="form-control"
+              placeholder="Buscar por nombre"
+            />
+          </div>
+          <div class="col-sm-5">
+            <input
+              type="text"
+              name="rut"
+              value="<%= rut %>"
+              class="form-control"
+              placeholder="Buscar por rut"
+            />
+          </div>
+          <div class="col-sm-2 d-grid">
+            <button type="submit" class="btn btn-outline-dark me-2">Buscar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h6 text-uppercase text-muted mb-0">Mascotas registradas</h2>
+          <span class="badge text-bg-light"><%= mascotas.length %></span>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-sm align-middle">
+            <thead>
+              <tr class="text-muted small">
+                <th>Nombre</th>
+                <th>Rut del dueño</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if (mascotas.length === 0) { %>
+                <tr>
+                  <td colspan="3" class="text-center text-muted py-4">Sin resultados.</td>
+                </tr>
+              <% } else { %>
+                <% mascotas.forEach(function (m) { %>
+                  <tr>
+                    <td><%= m.nombre %></td>
+                    <td><%= m.rut %></td>
+                    <td class="text-end">
+                      <button
+                        class="btn btn-sm btn-outline-danger"
+                        data-eliminar-nombre="<%= m.nombre %>"
+                      >
+                        Eliminar
+                      </button>
+                    </td>
+                  </tr>
+                <% }); %>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios@1.7.2/dist/axios.min.js"></script>
+  <script src="/js/eliminar.js"></script>
+</body>
+</html>
